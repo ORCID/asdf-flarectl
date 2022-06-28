@@ -28,10 +28,7 @@ gunzip -d "$release_file" || exit 1
 
 tar -xf "$release_file_tar" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file_tar"
 
-# rename the tool to an unversioned name
-mv "${ASDF_DOWNLOAD_PATH}/${TOOL_NAME}_v${ASDF_INSTALL_VERSION}" "${ASDF_DOWNLOAD_PATH}/$TOOL_NAME"
-
 chmod +x "${ASDF_DOWNLOAD_PATH}/$TOOL_NAME"
 
 # Remove the zip file since we don't need to keep it
-rm "$release_file"
+rm "$release_file_tar"
