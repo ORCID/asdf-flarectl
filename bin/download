@@ -16,7 +16,7 @@ release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar.xz"
 # Download tar.xz file to the download directory
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
 
-tar -xf "$release_file_tar" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file"
+tar -xf "$release_file" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file"
 
 chmod +x "${ASDF_DOWNLOAD_PATH}/$TOOL_NAME"
 
