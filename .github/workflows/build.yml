@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - "**.md"
+    branches:
+      - main
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  plugin_test_linux:
+    name: asdf plugin test linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: install unzip
+        run: sudo apt-get install -y unzip
+      - name: asdf_plugin_test
+        uses: asdf-vm/actions/plugin-test@v1
+        with:
+          command: flarectl --version
+
+  plugin_test_macos:
+    name: asdf plugin test macos
+    runs-on: macos-latest
+    steps:
+      - name: install unzip
+        run: brew install unzip
+      - name: asdf_plugin_test
+        uses: asdf-vm/actions/plugin-test@v1
+        with:
+          command: flarectl --version
+
+
