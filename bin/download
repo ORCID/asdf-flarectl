@@ -13,6 +13,8 @@ mkdir -p "$ASDF_DOWNLOAD_PATH"
 # TODO: Adapt this to proper extension and adapt extracting strategy.
 release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar.xz"
 
+release_file_tar="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar"
+
 # Download tar.gz file to the download directory
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
 
@@ -22,7 +24,9 @@ if ! type "gunzip" &>/dev/null; then
   exit 1
 fi
 
-gunzip -q "$release_file" -d "$ASDF_DOWNLOAD_PATH" || exit 1
+gunzip -d "$release_file" || exit 1
+
+tar -xf "$release_file_tar" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file_tar"
 
 # rename the tool to an unversioned name
 mv "${ASDF_DOWNLOAD_PATH}/${TOOL_NAME}_v${ASDF_INSTALL_VERSION}" "${ASDF_DOWNLOAD_PATH}/$TOOL_NAME"
