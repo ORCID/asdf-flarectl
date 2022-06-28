@@ -13,22 +13,12 @@ mkdir -p "$ASDF_DOWNLOAD_PATH"
 # TODO: Adapt this to proper extension and adapt extracting strategy.
 release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar.xz"
 
-release_file_tar="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION.tar"
-
-# Download tar.gz file to the download directory
+# Download tar.xz file to the download directory
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
 
-if ! type "gunzip" &>/dev/null; then
-  echo "ERROR: Command 'gunzip' not found."
-  echo "gunzip must be installed on your system."
-  exit 1
-fi
-
-gunzip -d "$release_file" || exit 1
-
-tar -xf "$release_file_tar" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file_tar"
+tar -xf "$release_file_tar" -C "$ASDF_DOWNLOAD_PATH" || fail "Could not extract $release_file"
 
 chmod +x "${ASDF_DOWNLOAD_PATH}/$TOOL_NAME"
 
 # Remove the zip file since we don't need to keep it
-rm "$release_file_tar"
+rm "$release_file"
