@@ -53,7 +53,7 @@ download_release() {
     local arch=$arch_test
   fi
 
-  url="$GH_REPO/releases/download/v${version}/flarectl_${version}_${platform}_${arch}.tar.xz"
+  url="$GH_REPO/releases/download/v${version}/flarectl_${version}_${platform}_${arch}.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
