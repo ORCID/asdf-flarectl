@@ -18,7 +18,8 @@ if [ -n "${GITHUB_API_TOKEN:-}" ]; then
 fi
 
 list_all_versions() {
-  list_github_tags
+  # Nasty hack, find a way of considering any releases with assets to be valid?
+  list_github_tags | grep -v beta | grep -v generated | grep '^0'
 }
 
 list_github_tags() {
